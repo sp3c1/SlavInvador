@@ -1,0 +1,14 @@
+{
+    "name": "wifi-brute",
+    "version": "1.0.0",
+    "description": "Cause TalkTalk is just crap",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "bspecjalny@gmail.com",
+    "license": "GNU",
+    "dependencies": {
+        "wifi-control": "^2.0.0"
+    }
+}
