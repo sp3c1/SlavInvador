@@ -1,3 +1,3 @@
-# SlavInvador
+# WifiBrute
 
-Cause TalkTalk is just crap
+Cause TalkTalk is just shade

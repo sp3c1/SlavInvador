@@ -1,9 +1,4 @@
-'use strict';
-
-
-function onlyUnique(value, index, self) {
-    return self.indexOf(value) === index;
-}
+'use strict'
 
 class BruteBart {
     constructor(min, max, dict, entropy) {
@@ -18,7 +13,7 @@ class BruteBart {
         } catch (e) {
             this.dict = dict;
         }
-        console.log('Established dictionary: ', JSON.stringify(this.dict));
+        //console.log('Established dictionary: ', JSON.stringify(this.dict));
 
         this.maxDic = dict.length - 1;
 
@@ -27,12 +22,14 @@ class BruteBart {
     }
 
     showInernals() {
+        /*
         console.log("Vector ", this.vector);
         console.log("Dict ", this.dict);
         console.log("MaxDic ", this.maxDic, "(+1)");
         console.log("Dict range", this.min, this.max);
 
         console.log('Current ', this.currentWord());
+        */
     }
 
     currentWord() {
@@ -72,7 +69,7 @@ class BruteBart {
 
                 this.vector.push(0);
                 this.curLenght++;
-                console.log('expanding vector [ ' + (this.vector.length - 1) + ' -> ' + this.vector.length + ' ]');
+                //console.log('expanding vector [ ' + (this.vector.length - 1) + ' -> ' + this.vector.length + ' ]');
             }
 
             if (!this.entropyLookUp(this.vector)) {
@@ -114,56 +111,23 @@ class BruteBart {
 
 }
 
+
 var dickBase = require('./dictionary') || "a";
 
+var dickGenerator = new BruteBart(8, 12, dickBase, 2);
+//dickGenerator.vector = [3, 2, 3, 3];
 
-var dickGenerator = new BruteBart(7, 12, dickBase, 2);
+console.log(dickGenerator.currentWord());
+while (1) {
+    try {
+        console.log(dickGenerator.nextWord());
+    } catch (e) {
 
-
-const cp = require('child_process');
-
-class SlavsMaster {
-    constructor(maxSlavs, generator, ssid) {
-        this.maxSlavs = maxSlavs;
-        this.generator = generator;
-        this.cp = Array(maxSlavs);
-        this.ssid = ssid;
-        this.go();
-    }
-
-    attach(index) {
-        this.cp[index] = cp.fork('./chp.js');
-        let msg = { network: this.ssid, password: this.generator.nextWord() };
-
-        this.cp[index].send(msg);
-
-        this.cp[index].on('message', (m) => {
-            console.log("======================================================")
-            console.log('MESSAGE: ' + JSON.stringify(m));
-            console.log("======================================================")
-            process.exit(0);
-            return; // got it!
-        });
-
-        this.cp[index].on('exit', (m) => {
-            this.attach(index);
-        });
-
-        this.cp[index].on('err', (m) => {
-            this.attach(index);
-        });
-    }
-
-    go() {
-        for (let i = 0; i < this.maxSlavs; i++) {
-            this.attach(i);
-        }
     }
 }
 
-try {
-    let bruting = new SlavsMaster(1, dickGenerator, require('./ssid'));
-} catch (e) {
-    console.log(e);
-    throw new Error('Failed to initate the scanner');
-}
+/*
+var test = [0, 0, 2, 3];
+console.log(dickGenerator.wordFromVector(test));
+console.log(dickGenerator.entropyLookUp(test));
+*/

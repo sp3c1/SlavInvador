@@ -3,11 +3,6 @@ logs
 *.log
 npm-debug.log*
 
-
-
-# node-waf configuration
-.lock-wscript
-
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
 
@@ -17,3 +12,6 @@ jspm_packages
 
 # Optional npm cache directory
 .npm
+
+ssid.js
+dict.txt
